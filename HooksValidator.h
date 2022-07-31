@@ -7,9 +7,11 @@ class hooksValidator
 {
 	string obj;
 
-	string start = "({[";
-	string finish = ")}]";
+	//string start = "({[";
+	//string finish = ")}]";
 	string list = "({[)}]";
+	bool isStartSymbol(int i);
+	bool isFinishSymbol(int i);
 
 public:
 	//Конструктори
@@ -21,16 +23,30 @@ public:
 
 };
 
+bool hooksValidator::isStartSymbol(int i)
+{
+	if (obj[i] == 91 || obj[i] == 40 || obj[i] == 123)
+		return true;
+	else
+		return false;
+}
+
+bool hooksValidator::isFinishSymbol(int i)
+{
+	if (obj[i] == 93 || obj[i] == 41 || obj[i] == 125)
+		return true;
+	else
+		return false;
+}
+
 //приймає строку, записує лише дужки
 void hooksValidator::takeInput(string s)
 {
-	for (size_t i{}; i < s.length(); i++)
-		for (size_t j{}; j < list.length(); j++)
-				if(s[i] == list[j])
-					obj += s[i];
-	
-	//std::cout << obj << '\n';
-	//std::cout << "STR LENGTH : " << obj.length() << '\n';
+	//for (size_t i{}; i < s.length(); i++)
+	//	for (size_t j{}; j < list.length(); j++)
+	//			if(s[i] == list[j])
+	//				obj += s[i];
+	obj = s;
 }
 
 //перевірка за домомогою динамічного стеку
@@ -40,40 +56,25 @@ void hooksValidator::chechToValid()
 	DynamicStack<char> stack;
 
 	for (size_t i{}; i < obj.length(); i++)
-		for (size_t j{}; j < start.length(); j++)
-		{
-			if (stack.peek() == finish[j])
-				stack.pop();
-			else
+	{
+			if(isStartSymbol(i))
+				stack.push(obj[i]);
+			else if(isFinishSymbol(i))
 			{
-				if (obj[i] == start[j])
-					stack.push(obj[i]);
-				else if (obj[i] == finish[j])
+				if ((obj[i] - stack.peek()) == 2 || (obj[i] - stack.peek()) == 1)
+					stack.pop();
+				else 
 					stack.push(obj[i]);
 			}
+	}
 
+	if (stack.isEmpty())
+		std::cout << "У введеному рядку дужки розставлені вірно\n";
+	else
+	{
+		std::cout << "У введеному рядку дужки розставлені НЕВІРНО!\n";
 
-				
-		}
-
-
-	
-
-
-
-
-	//for (size_t i{}; i < obj.length(); i++)
-	//	for (size_t j{}; j < start.length(); j++)
-	//	{
-	//			if (obj[i] == start[j])
-	//				stack.push(obj[i]);
-	//			else if (obj[i] == finish[j])
-	//				stack.push(obj[i]);
-	//	}
-
-	stack.print();
-
-
+	}
 
 
 }

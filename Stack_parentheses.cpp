@@ -12,12 +12,13 @@ int main()
 
 
     //Завідомо косячний приклад
-    string equationFalse = "([ x-y-z} * [x + 2y) - {z + 4x)]";
+    string equationFalse = "([ x-y-z } * [x + 2y) - {z + 4x)]";
     //Вірний приклад
-    string equationTrue = "({x-y-z} * [x + 2y] - (z + 4x))";
+    string equationTrue = "({x-y-z } * [x + 2y] - (z + 4x))";
  
-    std::cout << equationFalse << '\n';   
-    std::cout << equationTrue << '\n';
+    std::cout << "Правильний рядок: " << equationTrue << '\n';
+    std::cout << "Неправильний рядок: " << equationFalse << '\n';
+   
     
     
     //Зміна класу для перевірки правильної розстановки дужок у виразі

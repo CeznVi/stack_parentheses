@@ -7,20 +7,21 @@
 class hooksValidator
 {
 	string obj;
-
-	//string start = "({[";
-	//string finish = ")}]";
 	string list = "({[)}]";
+	//змінна стану класу
 	bool isEror = false;
+	//інспектор символів початку дужок
 	bool isStartSymbol(int i);
+	//інспектор символів закінчення дужок
 	bool isFinishSymbol(int i);
 
 public:
 	//Конструктори
 	hooksValidator() {};
 	hooksValidator(string s) {takeInput(s);}
-	
+	//отримати та перевірити данні
 	void takeInput(string s);
+	//метод перевірки по правильній розстановці дужок
 	void chechToValid();
 
 };
@@ -78,6 +79,7 @@ void hooksValidator::chechToValid()
 				stack.push(obj[i]);
 			else if(isFinishSymbol(i))
 			{
+				//2 та 1 - різниця між символами відкритої та закритої дужок
 				if ((obj[i] - stack.peek()) == 2 || (obj[i] - stack.peek()) == 1)
 					stack.pop();
 				else 
@@ -94,7 +96,10 @@ void hooksValidator::chechToValid()
 	}
 	else
 	{
-		std::cout << "У введеному рядку: " << obj << "\t дужки розставлені НЕВІРНО\n";
+		std::cout << "У введеному рядку: " << obj;
+		SetColor(ConsoleColor::Red);
+		std::cout << "\t дужки розставлені НЕВІРНО\n";
+		SetColor(ConsoleColor::White);
 
 	}
 

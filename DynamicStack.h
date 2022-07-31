@@ -6,7 +6,6 @@
 using namespace std;
 
 //size - мається на увазі максимальний розмір стеку
-
 template<class T, size_t size>
 class DynamicStack
 {
@@ -76,22 +75,15 @@ void DynamicStack<T, size>::push(const T& value)
 {
 	if (top < size)
 	{
+		top++;
 		T* temp = new T[top];
 
-		for (size_t i{}; i < top; i++)
+		for (size_t i{}; i < top-1; i++)
 			temp[i] = this->data[i];
-
+		
 		delete[] data;
-		top++;
-
-		data = new T[top];
-
-		for (size_t i{}; i < top - 1; i++)
-			this->data[i] = temp[i];
-
-		delete[] temp;
-
-		data[top-1] = value;
+		data = temp;
+		data[top - 1] = value;
 	}
 
 }
@@ -105,6 +97,7 @@ void DynamicStack<T, size>::pop()
 	}
 }
 
+//Повертає останне  значення
 template<class T, size_t size>
 T DynamicStack<T, size>::peek() const
 {

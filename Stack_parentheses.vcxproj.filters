@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Stack_parentheses.cpp">
+    <ClCompile Include="source.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="func.cpp">

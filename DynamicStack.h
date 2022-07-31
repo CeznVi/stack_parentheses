@@ -6,7 +6,7 @@
 using namespace std;
 
 //size - мається на увазі максимальний розмір стеку
-template<class T, size_t size = 100>
+template<class T, size_t size = 150>
 class DynamicStack
 {
 	T* data = nullptr;

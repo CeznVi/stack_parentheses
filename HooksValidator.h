@@ -21,8 +21,10 @@ public:
 	hooksValidator(string s) {takeInput(s);}
 	//отримати та перевірити данні
 	void takeInput(string s);
-	//метод перевірки по правильній розстановці дужок
+	//Метод перевірки по правильній розстановці дужок
 	void chechToValid();
+	//Метод який вказує на помилку в рядку при розставленні дужок 
+	void showErors(DynamicStack<char>& stack);
 
 };
 
@@ -100,8 +102,44 @@ void hooksValidator::chechToValid()
 		SetColor(ConsoleColor::Red);
 		std::cout << "\t дужки розставлені НЕВІРНО\n";
 		SetColor(ConsoleColor::White);
-
+		showErors(stack);
 	}
 
 
+}
+
+//Метод який вказує на помилку в рядку при розставленні дужок 
+void hooksValidator::showErors(DynamicStack<char>& stack)
+{
+	stack.clear();
+	std::cout << "Червоним виділено помилкові дужки\n";
+
+
+	for (size_t i{}; i < obj.length(); i++)
+	{
+		if (isStartSymbol(i))
+		{
+			stack.push(obj[i]);
+			SetColor(ConsoleColor::Green);
+			std::cout << obj[i];
+			SetColor(ConsoleColor::White);
+
+		}
+		else if (isFinishSymbol(i))
+		{
+			//2 та 1 - різниця між символами відкритої та закритої дужок
+			if ((obj[i] - stack.peek()) == 2 || (obj[i] - stack.peek()) == 1)
+				stack.pop();
+			else
+			{
+				SetColor(ConsoleColor::Red);
+				std::cout << obj[i];
+				SetColor(ConsoleColor::White);
+				stack.push(obj[i]);
+			}
+		}
+		else
+			std::cout << obj[i];
+	}
+	std::cout << "\n";
 }

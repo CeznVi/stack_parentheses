@@ -9,13 +9,13 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
    
-
-
     //Завідомо косячний приклад
     string equationFalse = "([ x-y-z } * [x + 2y) - {z + 4x)]";
     //Вірний приклад
     string equationTrue = "({x-y-z } * [x + 2y] - (z + 4x))";
+    //Текст в змінній каже сам за себе 
     string theFalsel = "нісенітциця повна";
+
     std::cout << "Правильний рядок: " << equationTrue << '\n';
     std::cout << "Неправильний рядок: " << equationFalse << '\n';
     std::cout << "Пустий рядок: " << theFalsel << '\n';
@@ -29,7 +29,7 @@ int main()
     s1.chechToValid();
     s2.chechToValid();
     s3.chechToValid();
-    //DynamicStack<char, 30> s{ ([x-y-z}*[x+2y)-{z+4x)] };
+   
 
 
 

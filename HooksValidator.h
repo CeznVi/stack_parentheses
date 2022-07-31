@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <string>
 #include "DynamicStack.h"
+#include "func.h"
 
 
 class hooksValidator
@@ -10,6 +11,7 @@ class hooksValidator
 	//string start = "({[";
 	//string finish = ")}]";
 	string list = "({[)}]";
+	bool isEror = false;
 	bool isStartSymbol(int i);
 	bool isFinishSymbol(int i);
 
@@ -42,16 +44,31 @@ bool hooksValidator::isFinishSymbol(int i)
 //приймає строку, записує лише дужки
 void hooksValidator::takeInput(string s)
 {
-	//for (size_t i{}; i < s.length(); i++)
-	//	for (size_t j{}; j < list.length(); j++)
-	//			if(s[i] == list[j])
-	//				obj += s[i];
-	obj = s;
+	int count{};
+
+	for(size_t i{}; i < s.length(); i++)
+		for (size_t j{}; j < list.length(); j++)
+				if(s[i] == list[j])
+					count++;
+
+	if (count >= 2)
+		obj = s;
+	else
+		isEror = true;
 }
 
 //перевірка за домомогою динамічного стеку
 void hooksValidator::chechToValid()
 {
+	//якщо строка без 2х дужок, або там зовсім якась нісінітнеця то виходимо із перевірки
+	if (isEror == true)
+	{
+		SetColor(ConsoleColor::Red);
+		std::cout << "Невірні данні!\n";
+		SetColor(ConsoleColor::White);
+		return;
+	}
+
 	//Максимальна емність динамічного стеку чар 100 символів
 	DynamicStack<char> stack;
 
@@ -69,10 +86,15 @@ void hooksValidator::chechToValid()
 	}
 
 	if (stack.isEmpty())
-		std::cout << "У введеному рядку дужки розставлені вірно\n";
+	{
+		std::cout << "У введеному рядку: " << obj;
+		SetColor(ConsoleColor::Green);
+		std::cout << "\t дужки розставлені вірно\n";
+		SetColor(ConsoleColor::White);
+	}
 	else
 	{
-		std::cout << "У введеному рядку дужки розставлені НЕВІРНО!\n";
+		std::cout << "У введеному рядку: " << obj << "\t дужки розставлені НЕВІРНО\n";
 
 	}
 

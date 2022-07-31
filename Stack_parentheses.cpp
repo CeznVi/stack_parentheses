@@ -15,19 +15,20 @@ int main()
     string equationFalse = "([ x-y-z } * [x + 2y) - {z + 4x)]";
     //Вірний приклад
     string equationTrue = "({x-y-z } * [x + 2y] - (z + 4x))";
- 
+    string theFalsel = "нісенітциця повна";
     std::cout << "Правильний рядок: " << equationTrue << '\n';
     std::cout << "Неправильний рядок: " << equationFalse << '\n';
-   
+    std::cout << "Пустий рядок: " << theFalsel << '\n';
     
     
     //Зміна класу для перевірки правильної розстановки дужок у виразі
     hooksValidator s1{ equationTrue };
     hooksValidator s2{ equationFalse };
-   
+    hooksValidator s3{ theFalsel };
+
     s1.chechToValid();
     s2.chechToValid();
-
+    s3.chechToValid();
     //DynamicStack<char, 30> s{ ([x-y-z}*[x+2y)-{z+4x)] };
 
 
